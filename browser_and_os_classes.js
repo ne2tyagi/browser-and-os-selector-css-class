@@ -9,9 +9,9 @@ ap_ver=navigator.appVersion;
 ua_cls="unknown_browser";
 os_cls="unknown_os";
 if(ua.indexOf('Windows')!=-1&&os.indexOf('win')!=-1){os_cls='windows';}
-else if(ua.indexOf('Mac')!=-1){os_cls="mac";}
+else if(ua.indexOf('Mac')!=-1&&ua.indexOf('iPhone')==-1){os_cls="mac";}
 else if(ua.indexOf('Linux')!=-1){
-  os_cls="linux";
+	os_cls="linux";
 	if(ua.indexOf('Fedora')!=-1)os_cls+=" fedora";
 	else if(ua.indexOf('Ubuntu')!=-1)os_cls+=" ubuntu";
 }
@@ -43,9 +43,11 @@ else if(ua.indexOf('Opera')!=-1){
 	ua_cls+=" "+ua_cls+ver;
 }
 else if(ua.indexOf('Mozilla')!=-1&&ua.indexOf('Safari')!=-1){
-	ua_cls="safari";
+	ua_cls="safari";	
 	ver=parseInt(ua.split('Version/')[1]);
 	ua_cls+=" "+ua_cls+ver;
+	if(ua.indexOf('CriOS')!=-1){ua_cls="chrome";ver=parseInt(ua.split('CriOS/')[1]);
+	ua_cls+=" "+ua_cls+ver;}
 }
 else if(ua.indexOf('Konqueror')!=-1){ua_cls="konqueror";}
 else if(ua.indexOf('Mosaic')!=-1){ua_cls="mosaic";}
@@ -64,4 +66,5 @@ if( window.addEventListener ) {
 function add_class(){
 body=document.getElementsByTagName('body')[0];
 body.className=body.className+" "+ua_cls+" "+os_cls;
+//alert(body.className+' '+ua+' '+os);
 }
